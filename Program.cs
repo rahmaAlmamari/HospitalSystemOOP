@@ -26,6 +26,7 @@
                 switch (choice)
                 {
                     case '1':
+                        //to add a new patient ...
                         Patient.AddPatient();
                         break;
                     case '0':
