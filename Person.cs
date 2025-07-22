@@ -15,11 +15,24 @@ namespace HospitalSystemOOP
         public int PersonAge;
 
         //2. class Person properties ...
+        public int P_Age
+        {
+            get { return PersonAge; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Age cannot be negative.");
+                }
+                PersonAge = value;
+            }
+        }
+
         //3. class Person methods ... 
         //to display person information ...
-        public virtual void DisplayInfo()
+        public virtual string DisplayInfo()
         {
-            Console.WriteLine($"ID: {PersonID}, Name: {PersonName}, Age: {PersonAge}");
+            return ($"ID: {PersonID}, Name: {PersonName}, Age: {P_Age}");
         }
         //4. class Person constructor ...
         public Person(string name , int personAge)
@@ -27,7 +40,7 @@ namespace HospitalSystemOOP
             PersonCount++; // Increment the static count
             PersonID = PersonCount; // Assign the current count to the instance ID
             PersonName = name;
-            PersonAge = personAge;
+            P_Age = personAge;
         }
     }
 }
