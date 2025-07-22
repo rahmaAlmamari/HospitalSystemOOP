@@ -20,7 +20,7 @@ namespace HospitalSystemOOP
             return ($"Doctor ID: {base.PersonID}\n" +  
                               $"Doctor Name: {base.PersonName}\n" + 
                               $"Doctor Age: {base.PersonAge}\n" +
-                              $"Doctor Specialization: {Specialization}" +
+                              $"Doctor Specialization: {Specialization}\n" +
                               $"-------------------------------------------");
         }
         //4. class Doctor constructor ...

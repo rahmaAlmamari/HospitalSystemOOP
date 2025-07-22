@@ -44,7 +44,7 @@ namespace HospitalSystemOOP
             return ($"Patient ID: {base.PersonID}\n" +
                               $"Patient Name: {base.PersonName}\n" +
                               $"Patient Age: {base.P_Age}\n" +
-                              $"Patient Phone Number: {P_PatientPhoneNumber}" +
+                              $"Patient Phone Number: {P_PatientPhoneNumber}\n" +
                               $"--------------------------------------------");
         }
         //to GetPatients ...
