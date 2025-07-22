@@ -13,6 +13,14 @@ namespace HospitalSystemOOP
         public int PhoneNumber;
         //2. class Patient properties ...
         //3. class Patient methods ...
+        //to display patient information ...
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Patient ID: {base.PersonID}\n" +
+                              $"Patient Name: {base.PersonName}\n" +
+                              $"Patient Age: {base.PersonAge}\n" +
+                              $"Patient Phone Number: {PhoneNumber}");
+        }
         //4. class Patient constructor ...
         public Patient(string name, int personAge) : base(name, personAge)
         {
