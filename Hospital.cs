@@ -12,5 +12,7 @@ namespace HospitalSystemOOP
         public static List<Doctor> HospitalDoctors = new List<Doctor>();
         //2. HospitalPatients list ...
         public static List<Patient> HospitalPatients = new List<Patient>();
+        //3. HospitalAppointments list ...
+        public static List<Appointment> HospitalAppointments = new List<Appointment>();
     }
 }
