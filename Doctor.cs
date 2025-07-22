@@ -14,6 +14,14 @@ namespace HospitalSystemOOP
         public List<DateTime> AvailableAppointments = new List<DateTime>(); // List of AvailableAppointments for the doctor
         //2. class Doctor properties ...
         //3. class Doctor methods ...
+        //to display doctor information ...
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Doctor ID: {base.PersonID}\n" +  
+                              $"Doctor Name: {base.PersonName}\n" + 
+                              $"Doctor Age: {base.PersonAge}\n" +
+                              $"Doctor Specialization: {Specialization}");
+        }
         //4. class Doctor constructor ...
         public Doctor(string name, int personAge) : base(name, personAge)
         {
