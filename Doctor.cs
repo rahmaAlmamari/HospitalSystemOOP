@@ -15,12 +15,13 @@ namespace HospitalSystemOOP
         //2. class Doctor properties ...
         //3. class Doctor methods ...
         //to display doctor information ...
-        public override void DisplayInfo()
+        public override string DisplayInfo()
         {
-            Console.WriteLine($"Doctor ID: {base.PersonID}\n" +  
+            return ($"Doctor ID: {base.PersonID}\n" +  
                               $"Doctor Name: {base.PersonName}\n" + 
                               $"Doctor Age: {base.PersonAge}\n" +
-                              $"Doctor Specialization: {Specialization}");
+                              $"Doctor Specialization: {Specialization}" +
+                              $"-------------------------------------------");
         }
         //4. class Doctor constructor ...
         public Doctor(string name, int personAge) : base(name, personAge)
