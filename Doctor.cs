@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace HospitalSystemOOP
 {
-    class Doctor
+    class Doctor : Person
     {
+
     }
 }
