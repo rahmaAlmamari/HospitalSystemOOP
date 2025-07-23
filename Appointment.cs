@@ -118,6 +118,32 @@ namespace HospitalSystemOOP
                 Console.WriteLine(appointment.DisplayAppointment());
             }
         }
+        //to ListAppointmentByPatientName ...
+        public static void ListAppointmentByPatientName()
+        {
+            //to check if there are appointments in the system or not ...
+            if (!GetAppointment())
+            {
+                return; // Exit if no appointments are available
+            }
+            //to get the patient name ...
+            string patientName = Validation.StringNamingValidation("patient name to search for appointments");
+            //to find and display appointments for the specified patient ...
+            var appointments = Hospital.HospitalAppointments.Where(a => a.AppointmentPatient.PersonName.Equals(patientName, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (appointments.Count == 0)
+            {
+                Console.WriteLine($"No appointments found for patient: {patientName}");
+            }
+            else
+            {
+                Console.WriteLine($"Appointments for patient: {patientName}");
+                foreach (var appointment in appointments)
+                {
+                    Console.WriteLine(appointment.DisplayAppointment());
+                }
+            }
+        }
+
         //4. class Appointment constructor ...
         public Appointment()
         {
