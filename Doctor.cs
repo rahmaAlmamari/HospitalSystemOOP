@@ -163,6 +163,7 @@ namespace HospitalSystemOOP
                 Console.WriteLine(doctor.DisplayInfo());
                 Console.WriteLine("-------------------------------------------\n");
             }
+            Additional.HoldScreen(); // Hold the screen after displaying doctors
         }
         //4. class Doctor constructor ...
         public Doctor(string name, int personAge) : base(name, personAge)

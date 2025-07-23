@@ -133,6 +133,7 @@ namespace HospitalSystemOOP
             if (appointments.Count == 0)
             {
                 Console.WriteLine($"No appointments found for patient: {patientName}");
+                Additional.HoldScreen(); // Hold the screen if no appointments found
             }
             else
             {
@@ -141,6 +142,34 @@ namespace HospitalSystemOOP
                 {
                     Console.WriteLine(appointment.DisplayAppointment());
                 }
+                Additional.HoldScreen(); // Hold the screen after displaying appointments
+            }
+        }
+        //to ListAppointmentByDate ...
+        public static void ListAppointmentByDate()
+        {
+            //to check if there are appointments in the system or not ...
+            if (!GetAppointment())
+            {
+                return; // Exit if no appointments are available
+            }
+            //to get the appointment date ...
+            DateTime appointmentDate = Validation.DateTimeValidation("appointment date to search for appointments");
+            //to find and display appointments for the specified date ...
+            var appointments = Hospital.HospitalAppointments.Where(a => a.AppointmentDate.Date == appointmentDate.Date).ToList();
+            if (appointments.Count == 0)
+            {
+                Console.WriteLine($"No appointments found for date: {appointmentDate.ToString("d")}");
+                Additional.HoldScreen(); // Hold the screen if no appointments found
+            }
+            else
+            {
+                Console.WriteLine($"Appointments for date: {appointmentDate.ToString("d")}");
+                foreach (var appointment in appointments)
+                {
+                    Console.WriteLine(appointment.DisplayAppointment());
+                }
+                Additional.HoldScreen(); // Hold the screen after displaying appointments
             }
         }
 
