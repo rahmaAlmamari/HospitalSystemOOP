@@ -14,7 +14,8 @@
                 Console.WriteLine("1. Add new patient");
                 Console.WriteLine("2. Add new doctor");
                 Console.WriteLine("3. Booking an appointment");
-                Console.WriteLine("4. Displaying all appointments ");
+                Console.WriteLine("4. Displaying all appointments");
+                Console.WriteLine("5. Showing available doctors by specialization");
                 Console.WriteLine("0. Exit");
                 Console.Write("Please select an option: ");
 
@@ -35,8 +36,12 @@
                         Appointment.BookAppointment();
                         break;
                     case '4':
-                        //to Booking an appointment ...
+                        //to displaying all appointments ...
                         Appointment.GetAppointmentsList();
+                        break;
+                    case '5':
+                        //to showing available doctors by specialization ...
+                        Doctor.SearchDoctorBySpecialization();
                         break;
                     case '0':
                         exitFlag = true;
