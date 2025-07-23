@@ -14,6 +14,7 @@
                 Console.WriteLine("1. Add new patient");
                 Console.WriteLine("2. Add new doctor");
                 Console.WriteLine("3. Booking an appointment");
+                Console.WriteLine("4. Displaying all appointments ");
                 Console.WriteLine("0. Exit");
                 Console.Write("Please select an option: ");
 
@@ -32,6 +33,10 @@
                     case '3':
                         //to Booking an appointment ...
                         Appointment.BookAppointment();
+                        break;
+                    case '4':
+                        //to Booking an appointment ...
+                        Appointment.GetAppointmentsList();
                         break;
                     case '0':
                         exitFlag = true;
