@@ -62,8 +62,27 @@ namespace HospitalSystemOOP
             //to store the newDoctor to HospitalDoctors list ...
             Hospital.HospitalDoctors.Add(newDoctor);
             Console.WriteLine("Doctor add successfully with following details:");
+            // to display the doctor information ...
             Console.WriteLine(newDoctor.DisplayInfo());
+            //to display the available appointments for the doctor ...
+            newDoctor.DisplayDoctorAvailableAppointments(newDoctor);
             Additional.HoldScreen();//to hold the screen ...
+        }
+        //to DisplayDoctorAvailableAppointments ...
+        public void DisplayDoctorAvailableAppointments(Doctor doctor)
+        {
+            //to check if there are available appointments for the doctor or not ...
+            if (doctor.AvailableAppointments.Count == 0)
+            {
+                Console.WriteLine("No available appointments for this doctor.");
+                return;
+            }
+            //to display the available appointments for the doctor ...
+            Console.WriteLine($"Available appointments for Dr. {doctor.PersonName}:");
+            for(int i = 0; i < doctor.AvailableAppointments.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {AvailableAppointments[i].ToString("dd/MM/yyyy HH:mm")}");
+            }
         }
         //4. class Doctor constructor ...
         public Doctor(string name, int personAge) : base(name, personAge)
