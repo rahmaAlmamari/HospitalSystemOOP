@@ -68,7 +68,7 @@ namespace HospitalSystemOOP
             newPatient.P_PatientPhoneNumber = Validation.IntValidation("patient phone number");
             //to store the newpatient to HospitalPatients list ...
             Hospital.HospitalPatients.Add(newPatient);
-            Console.WriteLine("Room add successfully with following details:");
+            Console.WriteLine("Patient add successfully with following details:");
             Console.WriteLine(newPatient.DisplayInfo());
             Additional.HoldScreen();//to hold the screen ...
         }

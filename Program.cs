@@ -12,12 +12,7 @@
             {
                 Console.Clear();
                 Console.WriteLine("1. Add new patient");
-                Console.WriteLine("2. View all room");
-                Console.WriteLine("3. Reserve a room for a guest");
-                Console.WriteLine("4. View all reservations with total cost");
-                Console.WriteLine("5. Search reservation by guest name");
-                Console.WriteLine("6. Find the highest-paying guest");
-                Console.WriteLine("7. Cancel a reservation by room number");
+                Console.WriteLine("2. Add new doctor");
                 Console.WriteLine("0. Exit");
                 Console.Write("Please select an option: ");
 
@@ -28,6 +23,10 @@
                     case '1':
                         //to add a new patient ...
                         Patient.AddPatient();
+                        break;
+                    case '2':
+                        //to add a new patient ...
+                        Doctor.AddDoctors();
                         break;
                     case '0':
                         exitFlag = true;
