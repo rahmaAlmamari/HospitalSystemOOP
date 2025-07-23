@@ -136,6 +136,34 @@ namespace HospitalSystemOOP
                 Additional.HoldScreen(); // Hold the screen if appointment not found
             }
         }
+        //to search a doctor by specialization ...
+        public static void SearchDoctorBySpecialization()
+        {
+            //to check if there are doctors in the system or not ...
+            if (!GetDoctor())
+            {
+                return; // Exit if no doctors are available
+            }
+            //to get the specialization from the user ...
+            string specialization = Validation.StringValidation("doctor specialization");
+            //to find the doctors by specialization ...
+            var doctors = Hospital.HospitalDoctors.Where(d => d.Specialization.Equals(specialization, StringComparison.OrdinalIgnoreCase)).ToList();
+            //.Equals(specialization, StringComparison.OrdinalIgnoreCase) ==>
+            //checks if the doctor’s specialization matches the specialization variable, ignoring case sensitivity
+            if (doctors.Count == 0)
+            {
+                Console.WriteLine($"No doctors found with specialization: {specialization}");
+                Additional.HoldScreen(); // Hold the screen if no doctors found
+                return;
+            }
+            //to display the found doctors ...
+            Console.WriteLine($"Doctors with specialization '{specialization}':");
+            foreach (var doctor in doctors)
+            {
+                Console.WriteLine(doctor.DisplayInfo());
+                Console.WriteLine("-------------------------------------------\n");
+            }
+        }
         //4. class Doctor constructor ...
         public Doctor(string name, int personAge) : base(name, personAge)
         {
