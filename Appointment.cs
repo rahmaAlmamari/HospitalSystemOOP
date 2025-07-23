@@ -103,6 +103,21 @@ namespace HospitalSystemOOP
 
 
         }
+        //to GetAppointmentsList ...
+        public static void GetAppointmentsList()
+        {
+            //to check if there are appointments in the system or not ...
+            if (!GetAppointment())
+            {
+                return; // Exit if no appointments are available
+            }
+            //to display the list of appointments ...
+            Console.WriteLine("List of Appointments:");
+            foreach (var appointment in Hospital.HospitalAppointments)
+            {
+                Console.WriteLine(appointment.DisplayAppointment());
+            }
+        }
         //4. class Appointment constructor ...
         public Appointment()
         {
