@@ -20,11 +20,19 @@ namespace HospitalSystemOOP
             get { return PersonAge; }
             set
             {
-                if (value < 0)
+                bool FalgError = false; //to handle the error ...
+                do
                 {
-                    throw new ArgumentException("Age cannot be negative.");
-                }
-                PersonAge = value;
+                    FalgError = false; //to reset the error flag ...
+                    if (value < 0)
+                    {
+                        Console.WriteLine("Age cannot be negative.");
+                        FalgError = true; //to handle the error ...
+                        value = Validation.IntValidation("person age"); //to get the person age again ...
+                    }
+                    PersonAge = value;
+                } while (FalgError);
+
             }
         }
 
