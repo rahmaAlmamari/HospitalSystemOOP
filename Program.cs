@@ -17,6 +17,7 @@
                 Console.WriteLine("4. Displaying all appointments");
                 Console.WriteLine("5. Showing available doctors by specialization");
                 Console.WriteLine("6. Search for appointments by patient name");
+                Console.WriteLine("7. Search for appointments by date");
                 Console.WriteLine("0. Exit");
                 Console.Write("Please select an option: ");
 
@@ -47,6 +48,10 @@
                     case '6':
                         //to search for appointments by patient name ...
                         Appointment.ListAppointmentByPatientName();
+                        break;
+                    case '7':
+                        //to search for appointments by date ...
+                        Appointment.ListAppointmentByDate();
                         break;
                     case '0':
                         exitFlag = true;
