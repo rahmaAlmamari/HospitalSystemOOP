@@ -84,6 +84,58 @@ namespace HospitalSystemOOP
                 Console.WriteLine($"{i + 1}. {AvailableAppointments[i].ToString("dd/MM/yyyy HH:mm")}");
             }
         }
+        //to GetDoctorList ...
+        public static void GetDoctorList()
+        {
+            //to check if there are doctors in the system or not ...
+            if (!GetDoctor())
+            {
+                return; // Exit if no doctors are available
+            }
+            //to display the list of doctors ...
+            Console.WriteLine("List of Doctors:");
+            foreach (var doctor in Hospital.HospitalDoctors)
+            {
+                // Display doctor information ...
+                Console.WriteLine(doctor.DisplayInfo());
+                // Display available appointments for each doctor ...
+                doctor.DisplayDoctorAvailableAppointments(doctor);
+                Console.WriteLine("-------------------------------------------\n");
+
+            }
+        }
+        //to GetDoctorByID ...
+        public static Doctor GetDoctorByID(int doctorID)
+        {
+            //to check if there are doctors in the system or not ...
+            if (!GetDoctor())
+            {
+                return null; // Exit if no doctors are available
+            }
+            //to find the doctor by ID ...
+            Doctor doctor = Hospital.HospitalDoctors.FirstOrDefault(d => d.PersonID == doctorID);
+            if (doctor == null)
+            {
+                Console.WriteLine("Doctor not found with the given ID.");
+                return null; // Return null if no doctor is found
+            }
+            return doctor; // Return the found doctor
+        }
+        //to delete a doctor available appointment ...
+        public static void DeleteDoctorAvailableAppointment(Doctor doctor, DateTime appointment)
+        {
+            if (doctor.AvailableAppointments.Contains(appointment))
+            {
+                doctor.AvailableAppointments.Remove(appointment);
+                Console.WriteLine($"Appointment on {appointment.ToString("dd/MM/yyyy HH:mm")} has been removed.");
+                Additional.HoldScreen(); // Hold the screen after deletion
+            }
+            else
+            {
+                Console.WriteLine("Appointment not found in the doctor's available appointments.");
+                Additional.HoldScreen(); // Hold the screen if appointment not found
+            }
+        }
         //4. class Doctor constructor ...
         public Doctor(string name, int personAge) : base(name, personAge)
         {
