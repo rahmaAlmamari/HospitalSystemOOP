@@ -6,6 +6,8 @@
         //public static Hospital hospital = new Hospital();
         static void Main(string[] args)
         {
+            //to display the welcome message ...
+            Additional.WelcomeMessage("Hospital Management");
             //to list the main menu options ...
             bool exitFlag = false;
             do
