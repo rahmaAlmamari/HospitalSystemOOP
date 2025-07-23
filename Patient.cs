@@ -72,6 +72,32 @@ namespace HospitalSystemOOP
             Console.WriteLine(newPatient.DisplayInfo());
             Additional.HoldScreen();//to hold the screen ...
         }
+        //to GetPatientsList ...
+        public static void GetPatientsList()
+        {
+            //to check if there are patients in the system or not ...
+            if (!GetPatients())
+            {
+                return; // Exit if no patients are available
+            }
+            //to display the list of patients ...
+            Console.WriteLine("List of Patients:");
+            foreach (var patient in Hospital.HospitalPatients)
+            {
+                Console.WriteLine( patient.DisplayInfo());
+            }
+        }
+        // to GetPatientByID ...
+        public static Patient GetPatientByID(int id)
+        {
+            //to check if there are patients in the system or not ...
+            if (!GetPatients())
+            {
+                return null; // Exit if no patients are available
+            }
+            //to find the patient by ID ...
+            return Hospital.HospitalPatients.FirstOrDefault(p => p.PersonID == id);
+        }
         //4. class Patient constructor ...
         public Patient(string name, int personAge) : base(name, personAge)
         {
