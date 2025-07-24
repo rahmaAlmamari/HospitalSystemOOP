@@ -121,6 +121,49 @@ namespace HospitalSystemOOP
             Console.WriteLine("Patients saved to file successfully.");
             Additional.HoldScreen();
         }
+        //to load patients data from file ...
+        public static void LoadPatientsFromFile()
+        {
+            try
+            {
+                if (!File.Exists("patients.txt"))
+                {
+                    Console.WriteLine("No saved patient details found.");
+                    Additional.HoldScreen();
+                    return;
+                }
+
+                Hospital.HospitalPatients.Clear();
+
+                string[] lines = File.ReadAllLines("patients.txt");
+
+                for (int i = 0; i < lines.Length; i += 5) // 5 lines per patient including dashed line
+                {
+                    if (i + 3 >= lines.Length)
+                        break;
+
+                    int id = int.Parse(lines[i].Split(':')[1].Trim());
+                    string name = lines[i + 1].Split(':')[1].Trim();
+                    int age = int.Parse(lines[i + 2].Split(':')[1].Trim());
+                    int phone = int.Parse(lines[i + 3].Split(':')[1].Trim());
+                    // line i+4 is the dashed line — we can ignore it
+
+                    Patient patient = new Patient(name, age);
+                    patient.PersonID = id;
+                    patient.P_PatientPhoneNumber = phone;
+
+                    Hospital.HospitalPatients.Add(patient);
+                }
+
+                Console.WriteLine("Patients loaded from file successfully.");
+                Additional.HoldScreen();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error loading patients: " + ex.Message);
+                Additional.HoldScreen();
+            }
+        }
 
         //4. class Patient constructor ...
         public Patient(string name, int personAge) : base(name, personAge)
