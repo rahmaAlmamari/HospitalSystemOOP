@@ -65,6 +65,8 @@
                         Doctor.SaveDoctorsToFile();
                         // to save patients data to file ...
                         Patient.SavePatientsToFile();
+                        // to save appointments data to file ...
+                        Appointment.SaveAppointmentsToFile();
                         Console.WriteLine("Thank you for using the Hotel System. Goodbye!");
                         break;
                     default:
