@@ -102,6 +102,26 @@ namespace HospitalSystemOOP
             //to find the patient by ID ...
             return Hospital.HospitalPatients.FirstOrDefault(p => p.PersonID == id);
         }
+        //to save patients data to file ...
+        public static void SavePatientsToFile()
+        {
+            if (!GetPatients())
+            {
+                return;
+            }
+
+            using (StreamWriter writer = new StreamWriter("patients.txt"))
+            {
+                foreach (var patient in Hospital.HospitalPatients)
+                {
+                    writer.WriteLine(patient.DisplayInfo());
+                }
+            }
+
+            Console.WriteLine("Patients saved to file successfully.");
+            Additional.HoldScreen();
+        }
+
         //4. class Patient constructor ...
         public Patient(string name, int personAge) : base(name, personAge)
         {
