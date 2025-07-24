@@ -193,7 +193,7 @@ namespace HospitalSystemOOP
             Additional.HoldScreen(); // Hold the screen after saving
         }
         //to load the doctors data from file ...
-        public static void LoadGuestDetailsFromFile()
+        public static void LoadDoctorsDetailsFromFile()
         {
             try
             {
