@@ -197,6 +197,59 @@ namespace HospitalSystemOOP
             Console.WriteLine("Appointments saved to file successfully.");
             Additional.HoldScreen();
         }
+        //to load appointments from file ...
+        public static void LoadAppointmentsFromFile()
+        {
+            try
+            {
+                if (!File.Exists(AppointmentDataFile))
+                {
+                    Console.WriteLine("No saved appointments found.");
+                    Additional.HoldScreen();
+                    return;
+                }
+
+                Hospital.HospitalAppointments.Clear();
+
+                string[] lines = File.ReadAllLines(AppointmentDataFile);
+
+                for (int i = 0; i < lines.Length; i += 4)
+                {
+                    if (i + 3 >= lines.Length)
+                        break;
+
+                    int appointmentID = int.Parse(lines[i].Split(':')[1].Trim());
+                    int doctorID = int.Parse(lines[i + 1].Split(':')[1].Trim());
+                    int patientID = int.Parse(lines[i + 2].Split(':')[1].Trim());
+                    DateTime appointmentDate = DateTime.ParseExact(
+                        lines[i + 3].Split(':')[1].Trim(),
+                        "dd/MM/yyyy HH:mm",
+                        null);
+
+                    Doctor doctor = Doctor.GetDoctorByID(doctorID);
+                    Patient patient = Patient.GetPatientByID(patientID);
+
+                    if (doctor != null && patient != null)
+                    {
+                        Appointment appointment = new Appointment();
+                        appointment.AppointmentID = appointmentID; // Override auto-generated ID
+                        appointment.AppointmentDoctor = doctor;
+                        appointment.AppointmentPatient = patient;
+                        appointment.AppointmentDate = appointmentDate;
+
+                        Hospital.HospitalAppointments.Add(appointment);
+                    }
+                }
+
+                Console.WriteLine("Appointments loaded from file successfully.");
+                Additional.HoldScreen();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error loading appointments: " + ex.Message);
+                Additional.HoldScreen();
+            }
+        }
 
         //4. class Appointment constructor ...
         public Appointment()
