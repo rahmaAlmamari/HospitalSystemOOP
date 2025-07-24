@@ -61,6 +61,8 @@
                         exitFlag = true;
                         //to save doctors data to file ...
                         Doctor.SaveDoctorsToFile();
+                        // to save patients data to file ...
+                        Patient.SavePatientsToFile();
                         Console.WriteLine("Thank you for using the Hotel System. Goodbye!");
                         break;
                     default:
