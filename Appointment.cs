@@ -175,6 +175,28 @@ namespace HospitalSystemOOP
                 Additional.HoldScreen(); // Hold the screen after displaying appointments
             }
         }
+        //to save appointments to file ...
+        public static void SaveAppointmentsToFile()
+        {
+            if (!GetAppointment())
+            {
+                return;
+            }
+
+            using (StreamWriter writer = new StreamWriter(AppointmentDataFile))
+            {
+                foreach (var appointment in Hospital.HospitalAppointments)
+                {
+                    writer.WriteLine($"Appointment ID: {appointment.AppointmentID}");
+                    writer.WriteLine($"Doctor ID: {appointment.AppointmentDoctor.PersonID}");
+                    writer.WriteLine($"Patient ID: {appointment.AppointmentPatient.PersonID}");
+                    writer.WriteLine($"Date and Time: {appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")}");
+                }
+            }
+
+            Console.WriteLine("Appointments saved to file successfully.");
+            Additional.HoldScreen();
+        }
 
         //4. class Appointment constructor ...
         public Appointment()
