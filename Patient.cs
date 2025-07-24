@@ -11,6 +11,10 @@ namespace HospitalSystemOOP
         //1. class Patient fields ...
         public static int PatientCount = 0; // Static field to count patients
         public int PatientPhoneNumber;
+
+        //to hold patient data to file ...
+        public static string PatientDataFile = "patients.txt"; // File to store patient data
+
         //2. class Patient properties ...
         public int P_PatientPhoneNumber
         {
