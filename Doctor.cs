@@ -12,6 +12,8 @@ namespace HospitalSystemOOP
         public static int DoctorCount = 0; // Static field to count doctors
         public string Specialization; // Doctor's specialization
         public List<DateTime> AvailableAppointments = new List<DateTime>(); // List of AvailableAppointments for the doctor
+        //to hold doctor data to file ...
+        
         //2. class Doctor properties ...
         //3. class Doctor methods ...
         //to display doctor information ...
@@ -164,6 +166,31 @@ namespace HospitalSystemOOP
                 Console.WriteLine("-------------------------------------------\n");
             }
             Additional.HoldScreen(); // Hold the screen after displaying doctors
+        }
+        //to save the doctors to a file ...
+        public static void SaveDoctorsToFile()
+        {
+            //to check if there are doctors in the system or not ...
+            if (!GetDoctor())
+            {
+                return; // Exit if no doctors are available
+            }
+            //to save the doctors to a file ...
+            using (StreamWriter writer = new StreamWriter("doctors.txt"))
+            {
+                foreach (var doctor in Hospital.HospitalDoctors)
+                {
+                    writer.WriteLine(doctor.DisplayInfo());
+                    // Write available appointments to the file ...
+                    foreach (var appointment in doctor.AvailableAppointments)
+                    {
+                        writer.WriteLine($"Available Appointment: {appointment.ToString("dd/MM/yyyy HH:mm")}");
+                    }
+                    writer.WriteLine("-------------------------------------------");
+                }
+            }
+            Console.WriteLine("Doctors saved to file successfully.");
+            Additional.HoldScreen(); // Hold the screen after saving
         }
         //4. class Doctor constructor ...
         public Doctor(string name, int personAge) : base(name, personAge)
