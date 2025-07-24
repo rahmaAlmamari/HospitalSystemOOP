@@ -198,64 +198,76 @@ namespace HospitalSystemOOP
         {
             try
             {
-                if (File.Exists(DoctorDataFile))
+                if (!File.Exists(Doctor.DoctorDataFile))
                 {
-                    //int count = 0;
-                    using (StreamReader reader = new StreamReader(DoctorDataFile))
+                    Console.WriteLine("No saved doctor details found.");
+                    Additional.HoldScreen();
+                    return;
+                }
+
+                Hospital.HospitalDoctors.Clear(); // Clear old data
+
+                using (StreamReader reader = new StreamReader(Doctor.DoctorDataFile))
+                {
+                    string line;
+                    Doctor doctor = null;
+                    bool readingAppointments = false;
+
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        while (!reader.EndOfStream)
+                        if (line.StartsWith("Doctor ID:"))
                         {
-                            string line1 = reader.ReadLine(); // Guest ID
-                            string line2 = reader.ReadLine(); // Guest Name
-                            string line3 = reader.ReadLine(); // Guest Phone Number
-                            string line4 = reader.ReadLine(); // Guest Number Of Nights
-                            string line5 = reader.ReadLine(); // Guest Room Number
-                            string line6 = reader.ReadLine(); // IGuset Total Cost
-                            string line7 = reader.ReadLine(); // Check-In Date
-                            string line8 = reader.ReadLine(); // Check-Out Date
-                            string separator = reader.ReadLine(); // Separator (e.g. "----")
+                            int id = int.Parse(line.Split(':')[1].Trim());
 
-                            if (line1 != null && line2 != null && line3 != null && line4 != null
-                                && line5 != null && line6 != null && line7 != null && line8 != null)
+                            string nameLine = reader.ReadLine();
+                            string ageLine = reader.ReadLine();
+                            string specLine = reader.ReadLine();
+                            string separator = reader.ReadLine(); // Skip dashed line
+
+                            string name = nameLine.Split(':')[1].Trim();
+                            int age = int.Parse(ageLine.Split(':')[1].Trim());
+                            string specialization = specLine.Split(':')[1].Trim();
+
+                            doctor = new Doctor(name, age);
+                            doctor.PersonID = id;
+                            doctor.Specialization = specialization;
+                            doctor.AvailableAppointments = new List<DateTime>();
+                        }
+                        else if (line.StartsWith("Available Appointment:"))
+                        {
+                            readingAppointments = true;
+                        }
+                        else if (line.StartsWith("==="))
+                        {
+                            // End of doctor record
+                            if (doctor != null)
                             {
-                                Guest guest = new Guest();
-                                guest.GuestID = int.Parse(line1.Split(':')[1].Trim());
-                                guest.GuestName = line2.Split(':')[1].Trim();
-                                guest.P_GuestPhoneNumber = int.Parse(line3.Split(':')[1].Trim());
-                                guest.NumberOfNights = int.Parse(line4.Split(':')[1].Trim());
-                                int roomNumber = int.Parse(line5.Split(':')[1].Trim());
-                                guest.GuestRoom = Program.HotelRooms.Find(r => r.RoomNumber == roomNumber);
-                                if (guest.GuestRoom != null)
-                                {
-                                    // Mark the room as reserved
-                                    guest.GuestRoom.IsAvailable = false;
-                                    int index = Program.HotelRooms.IndexOf(guest.GuestRoom);
-                                    //to update the room in the list ...
-                                    Program.HotelRooms[index].IsAvailable = false; // Mark the room as reserved
-
-                                }
-                                guest.TotalCosts = double.Parse(line6.Split(':')[1].Trim());
-                                guest.P_CheckIn = DateOnly.Parse(line7.Split(':')[1].Trim());
-                                guest.P_CheckOut = DateOnly.Parse(line8.Split(':')[1].Trim());
-                                Program.HotelGuests.Add(guest); // Add the guest to the list
+                                Hospital.HospitalDoctors.Add(doctor);
+                                doctor = null;
+                            }
+                            readingAppointments = false;
+                        }
+                        else if (readingAppointments && doctor != null)
+                        {
+                            if (DateTime.TryParseExact(line, "dd/MM/yyyy HH:mm", null,
+                                System.Globalization.DateTimeStyles.None, out DateTime appointment))
+                            {
+                                doctor.AvailableAppointments.Add(appointment);
                             }
                         }
                     }
-                    Console.WriteLine("Hotel guests details loaded successfully.");
-                    Additional.HoldScreen();//just to hold second ...
                 }
-                else
-                {
-                    Console.WriteLine("No saved guests details found.");
-                    Additional.HoldScreen();//just to hold second ...
-                }
+
+                Console.WriteLine("Doctors loaded from file successfully.");
+                Additional.HoldScreen();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error loading guests details: " + ex.Message);
-                Additional.HoldScreen();//just to hold second ...
+                Console.WriteLine("Error loading doctors: " + ex.Message);
+                Additional.HoldScreen();
             }
         }
+
         //4. class Doctor constructor ...
         public Doctor(string name, int personAge) : base(name, personAge)
         {
